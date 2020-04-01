@@ -9,5 +9,7 @@ namespace Cwiczenie3ABDP.DAL
     public interface IDbService 
     {
         public IEnumerable<Student> GetStudents();
+        public Enrollment EnrollStudent(Student student);
+        public Enrollment PromoteStudent(Promotion promotion);
     }
 }

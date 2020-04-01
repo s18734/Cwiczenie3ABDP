@@ -37,7 +37,7 @@ ALTER TABLE Student ADD CONSTRAINT Student_Enrollment
 INSERT INTO Studies (IdStudy, Name) values (1, 'AUG')
 INSERT INTO Studies (IdStudy, Name) values (2, 'SBD')
 INSERT INTO Studies (IdStudy, Name) values (3, 'RBD')
-
+INSERT INTO Studies (IdStudy, Name) values (4, 'IT')
 
 INSERT INTO Enrollment (IdEnrollment, Semester, IdStudy, StartDate) VALUES (1,1,1,'2000-01-01')
 INSERT INTO Enrollment (IdEnrollment, Semester, IdStudy, StartDate) VALUES (2,2,2,'2000-02-02')
@@ -49,3 +49,31 @@ INSERT INTO Student (IndexNumber, FirstName, LastName, BirthDate, IdEnrollment) 
 INSERT INTO Student (IndexNumber, FirstName, LastName, BirthDate, IdEnrollment) VALUES (2,'Karol', 'Nowak','1980-02-02',2)
 INSERT INTO Student (IndexNumber, FirstName, LastName, BirthDate, IdEnrollment) VALUES (3,'Ania', 'Bebzol','1980-03-03',3)
 
+
+select count(1) from Studies where name = 'Aug';
+select a.idEnrollment from Enrollment a inner join Studies on idStudy = 1 and Semester = 1
+select * from Enrollment;
+select * from student;
+
+go;
+
+create or alter procedure procedura1
+    @Studies varchar2(100),
+    @Semester int
+as
+begin
+    declare @idstudy int;
+    declare @idenrollment int;
+    select @idstudy = idstudy from Studies where Name = @Studies;
+    
+    select @idenrollmentcount = count(idenrollment) from Enrollment where Semester = @Semester+1 and IdStudy = @idstudy
+    if @idenrollmentcount = 0 
+        begin
+            insert into Enrollment values ( (select max(idenrollment)+1 from Enrollment), @Semester+1, @idstudy, Current_TimeStamp)
+        end;
+    select @idenrollmentCurrent = idenrollment from Enrollment where Semester = @Semester and IdStudy = @idstudy
+    select @idenrollmentFuture =  idenrollment from Enrollment where Semester = @Semester+1 and IdStudy = @idstudy
+
+    update Student set idEnrollment = @idenrollmentFuture where idEnrollment = @idenrollmentCurrent;
+
+end
