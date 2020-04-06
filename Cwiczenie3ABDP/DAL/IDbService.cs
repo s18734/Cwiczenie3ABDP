@@ -11,5 +11,6 @@ namespace Cwiczenie3ABDP.DAL
         public IEnumerable<Student> GetStudents();
         public Enrollment EnrollStudent(Student student);
         public Enrollment PromoteStudent(Promotion promotion);
+        public bool CheckIndex(string index);
     }
 }

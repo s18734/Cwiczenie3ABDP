@@ -178,5 +178,26 @@ namespace Cwiczenie3ABDP.DAL
 
 
         }
+        public bool CheckIndex(string index) {
+            using (var polaczenie = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18734;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                polaczenie.Open();
+                com.Connection = polaczenie;
+                com.CommandText = $"select count(1) from Student where IndexNumber = @index";
+                com.Parameters.AddWithValue("index", index);
+
+                int id = -1;
+                var dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    id =  (int)dr.GetValue(0);
+                }
+                if (id == -1) return false;
+
+
+            }
+            return true;
+        }
     }
 }

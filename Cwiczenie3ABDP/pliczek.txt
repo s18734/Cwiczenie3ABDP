@@ -1,0 +1,71 @@
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /favicon.ico
+Query = 
+
+method = POST
+path = /api/enrollment/
+Query = 
+{
+"IndexNumber": "s1235",
+"FirstName": "Andrzej",
+"LastName": "Malewski",
+"BirthDate": "30.03.1993",
+"Studies": "IT"
+}
+
+method = POST
+path = /api/enrollment/
+Query = 
+{
+"IndexNumber": "s1235",
+"FirstName": "Andrzej",
+"LastName": "Malewski",
+"BirthDate": "30.03.1993",
+"Studies": "AUG"
+}
+
+method = POST
+path = /api/enrollment/
+Query = 
+{
+"IndexNumber": "s123234",
+"FirstName": "Andrzej",
+"LastName": "Malewski",
+"BirthDate": "30.03.1993",
+"Studies": "AUG"
+}
+
+method = POST
+path = /api/enrollment/
+Query = 
+{
+"IndexNumber": "s123234",
+"FirstName": "Andrzej",
+"LastName": "Malewski",
+"BirthDate": "1993-03-30",
+"Studies": "AUG"
+}
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /favicon.ico
+Query = 
+
+method = POST
+path = /api/enrollments/
+Query = 
+{
+"IndexNumber": "s123234",
+"FirstName": "Andrzej",
+"LastName": "Malewski",
+"BirthDate": "1993-03-30",
+"Studies": "AUG"
+}
+

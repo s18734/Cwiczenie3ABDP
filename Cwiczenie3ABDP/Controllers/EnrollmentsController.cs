@@ -29,7 +29,7 @@ namespace Cwiczenie3ABDP.Controllers
             try
             {
                 return Created("",_dbService.EnrollStudent(student));
-           }
+            }
             catch(Exception e)
             {
                 Console.WriteLine("Cos poszlo nie tak!!!");
