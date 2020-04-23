@@ -1,9 +1,13 @@
-﻿using Cwiczenie3ABDP.Models;
+﻿using Cwiczenie3ABDP.DTO;
+using Cwiczenie3ABDP.Models;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Cwiczenie3ABDP.DAL
@@ -199,5 +203,96 @@ namespace Cwiczenie3ABDP.DAL
             }
             return true;
         }
+        public bool CheckCredentials(LoginRequestDTO request)
+        {
+            using (var client = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18734;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                client.Open();
+                com.Connection = client;
+                com.CommandText = "select salt from student where indexnumber = @id2";
+                com.Parameters.AddWithValue("id2", request.Login);
+                var dr = com.ExecuteReader();
+                string haslosalt = "";
+                dr.Read();
+                haslosalt = dr["Salt"].ToString();
+                dr.Close();
+
+
+                var hash = CreateHash(request.Haslo, haslosalt);
+
+                com.CommandText = "select password from Student where indexnumber=@id2";
+      
+                dr = com.ExecuteReader();
+                dr.Read();
+                string haslo = (string)dr.GetValue(0);
+                dr.Close();
+
+                if (!haslo.Equals(hash))
+                    return false;
+                return true;
+            }
+        }
+
+
+        public string CheckRefTok(string refTok)
+        {
+            using (var client = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18734;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                client.Open();
+                com.Connection = client;
+                com.CommandText = "select indexNumber from student where refreshToken = @reftok";
+                com.Parameters.AddWithValue("reftok", refTok);
+                var dr = com.ExecuteReader();
+
+                dr.Read();
+                string login = "";
+                if(dr.HasRows)
+                {
+                    login = dr["indexNumber"].ToString();
+
+                }
+
+                dr.Close();
+                return login;
+            }
+        }
+
+        public void AddRefreshToken(Guid refreshToken, string login)
+        {
+            using (var client = new SqlConnection("Data Source=db-mssql;Initial Catalog=s18734;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                client.Open();
+                com.Connection = client;
+                com.CommandText = "update student set RefreshToken = @token where IndexNumber = @login";
+                com.Parameters.AddWithValue("token", refreshToken);
+                com.Parameters.AddWithValue("login", login);
+                var dr = com.ExecuteNonQuery();
+            }
+        }
+
+        public string CreateSalt()
+        {
+            byte[] randomBytes = new byte[128 / 8];
+            using (var generator = RandomNumberGenerator.Create())
+            {
+                generator.GetBytes(randomBytes);
+                return Convert.ToBase64String(randomBytes);
+            }
+        }
+        public string CreateHash(string password, string salt)
+        {
+            var valueBytes = KeyDerivation.Pbkdf2(
+                                    password: password,
+                                    salt: Encoding.UTF8.GetBytes(salt),
+                                    prf: KeyDerivationPrf.HMACSHA512,
+                                    iterationCount: 10000,
+                                    numBytesRequested: 256 / 8);
+
+            return Convert.ToBase64String(valueBytes);
+        }
+        
     }
 }

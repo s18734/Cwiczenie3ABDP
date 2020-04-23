@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Cwiczenie3ABDP.DAL;
+using Cwiczenie3ABDP.DTO;
 using Cwiczenie3ABDP.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cwiczenie3ABDP.Controllers
 {
@@ -18,15 +26,18 @@ namespace Cwiczenie3ABDP.Controllers
     {
 
 
+        public IConfiguration Configuration { get; set; }
 
         private readonly IDbService _dbService;
 
-        public StudentsController(IDbService dbService)
+        public StudentsController(IDbService dbService, IConfiguration configuration)
         {
             _dbService = dbService;
+            Configuration = configuration;
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult GetStudent()
         {
             List<Object> list = new List<object>();
@@ -108,6 +119,61 @@ namespace Cwiczenie3ABDP.Controllers
             Student.IndexNumber = $"s{new Random().Next(1, 20000)}";
             return Ok(Student);
         }
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Login(LoginRequestDTO request)
+        {
+
+            if (!_dbService.CheckCredentials(request))
+            {
+                return Unauthorized();
+            }
+            Console.WriteLine(_dbService.CreateSalt());
+            return Ok(NowyToken(request.Login));
+        }
+        [HttpPost("refreshToken")]
+        public IActionResult RefreshToken(string refreshToken)
+        {
+            string login = _dbService.CheckRefTok(refreshToken);
+            if (login == "")
+            {
+                return Unauthorized();
+           }
+
+           return Ok(NowyToken(login));
+        }
+        public object NowyToken(string login)
+        {
+            var claims = new[] {
+
+                        new Claim(ClaimTypes.NameIdentifier,"1"),
+                        new Claim(ClaimTypes.Name,"Jan"),
+                        new Claim(ClaimTypes.Role, "admin"),
+                        new Claim(ClaimTypes.Role, "student"),
+                        new Claim(ClaimTypes.Role, "employee")
+                        };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                    issuer: "Gakko",
+                    audience: "student",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(10),
+                    signingCredentials: creds
+                    );
+
+            var newToken = Guid.NewGuid();
+            _dbService.AddRefreshToken(newToken, login);
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                refreshToken = newToken
+            }
+          ) ;
+        }
+
         [HttpPut]
         public IActionResult PutStudent(string id)
         {

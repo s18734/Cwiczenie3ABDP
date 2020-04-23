@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cwiczenie3ABDP.DAL;
 using Cwiczenie3ABDP.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace Cwiczenie3ABDP.Controllers
     
     
     [ApiController]
+    [Authorize(Roles = "employee")]
     public class EnrollmentsController : ControllerBase
     {
 

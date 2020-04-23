@@ -69,3 +69,315 @@ Query =
 "Studies": "AUG"
 }
 
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /favicon.ico
+Query = 
+
+method = POST
+path = /api/students/
+Query = 
+{
+	"Login": "dupa",
+	"Haslo": "dupa"
+}
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /favicon.ico
+Query = 
+
+method = POST
+path = /api/students/
+Query = 
+{
+	"Login": "dupa",
+	"Haslo": "dupa"
+}
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login": "dupa",
+	"Haslo": "dupa"
+}
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /favicon.ico
+Query = 
+
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login": "dupa",
+	"Haslo": "dupa"
+}
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login": "dupa",
+	"Haslo": "dupa"
+}
+
+method = GET
+path = /api/students/
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/post
+Query = 
+{
+	"Login":"1123",
+	"Haslo": "123"
+}
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1123",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1123",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1123",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1123",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123r"
+}
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1",
+	"Haslo": "123"
+}
+method = GET
+path = /api/students/refreshToken/
+Query = ?refreshToken=17402AF2-5CC0-4D2B-950B-E8140F4A751
+{
+	
+}
+method = GET
+path = /api/students/refreshToken/17402AF2-5CC0-4D2B-950B-E8140F4A751
+Query = 
+{
+	
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo":"123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1",
+	"Haslo":"123"
+}
+method = GET
+path = /api/students/refreshToken
+Query = ?refreshToken=5DA78636-F78C-4FB6-8E8F-EBE25A6D3F33
+{
+	"Login":"1",
+	"Haslo":"123"
+}
+method = GET
+path = /
+Query = 
+
+method = POST
+path = /api/students/login
+Query = 
+{
+	"Login":"1",
+	"Haslo":"123"
+}
+method = GET
+path = /api/students/
+Query = 
+{
+	"Login":"1",
+	"Haslo":"123"
+}
+method = POST
+path = /api/students/refreshToken
+Query = ?refreshToken=BDC7A024-70B3-495F-B1B3-DC8B55470D7A
+
