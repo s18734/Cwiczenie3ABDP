@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cwiczenie3ABDP.DAL;
+using Cwiczenie3ABDP.DTO;
 using Cwiczenie3ABDP.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,6 @@ namespace Cwiczenie3ABDP.Controllers
     
     
     [ApiController]
-    [Authorize(Roles = "employee")]
     public class EnrollmentsController : ControllerBase
     {
 
@@ -26,11 +26,11 @@ namespace Cwiczenie3ABDP.Controllers
 
         [Route("api/enrollments")]
         [HttpPost]
-        public IActionResult CreateStudent(Student student)
+        public IActionResult CreateStudent(EnrollStudentReq req)
         {
             try
             {
-                return Created("",_dbService.EnrollStudent(student));
+                return Created("",_dbService.EnrollStudent(req));
             }
             catch(Exception e)
             {
@@ -38,11 +38,11 @@ namespace Cwiczenie3ABDP.Controllers
                 Console.WriteLine(e.StackTrace);
                 return StatusCode(400);
             }
-            return Ok(student);
+          
         }
         [Route("api/enrollments/promotions")]
         [HttpPost]
-        public IActionResult PromoteStudent(Promotion promotion)
+        public IActionResult PromoteStudent(PromoteStudentReq promotion)
         {
             //try
             //{
@@ -54,7 +54,7 @@ namespace Cwiczenie3ABDP.Controllers
             //    Console.WriteLine(e.StackTrace);
             //    return StatusCode(400);
             //}
-            return Ok(promotion);
+           
         }
     }
 }

@@ -381,3 +381,103 @@ method = POST
 path = /api/students/refreshToken
 Query = ?refreshToken=BDC7A024-70B3-495F-B1B3-DC8B55470D7A
 
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+
+method = GET
+path = /api/students
+Query = 
+

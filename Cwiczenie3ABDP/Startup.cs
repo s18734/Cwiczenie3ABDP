@@ -46,7 +46,7 @@ namespace Cwiczenie3ABDP
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]))
                         };
                     });
-           //dodac polaczenie z dbservice ktoryu stworzymy z metoda check addTransient<IDBService, DbService>
+            //dodac polaczenie z dbservice ktoryu stworzymy z metoda check addTransient<IDBService, DbService>
             services.AddSingleton<IDbService, DBServiceMS>();
             services.AddControllers();
         }
@@ -61,7 +61,7 @@ namespace Cwiczenie3ABDP
 
 
             //zad2
-            app.UseMiddleware<LoggingMiddleware>();
+            //app.UseMiddleware<LoggingMiddleware>();
             //middlewary wy¿ej maja pierwszeñstwo wiec zadanie 2 trzeba zrobiæ nad tym middlewarem
             //zad1
             //app.Use(async (context, next) =>

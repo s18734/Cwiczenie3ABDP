@@ -9,9 +9,9 @@ namespace Cwiczenie3ABDP.DAL
 {
     public interface IDbService 
     {
-        public IEnumerable<Student> GetStudents();
-        public Enrollment EnrollStudent(Student student);
-        public Enrollment PromoteStudent(Promotion promotion);
+        
+        public Models_Zadanie10.Enrollment EnrollStudent(EnrollStudentReq req);
+        public Models_Zadanie10.Enrollment PromoteStudent(PromoteStudentReq promotion);
         public bool CheckIndex(string index);
 
         public bool CheckCredentials(LoginRequestDTO request);
@@ -21,5 +21,12 @@ namespace Cwiczenie3ABDP.DAL
 
         public void AddRefreshToken(Guid refreshToken, string login);
         public string CheckRefTok(string refTok);
+
+        public bool CheckIfStudentsExists();
+
+        public IEnumerable<Models_Zadanie10.Student> GetStudents_zad10();
+        public bool checkIfStudentExist(string id);
+        public void modifyStudent(Models_Zadanie10.Student student, String id);
+        public void removeStudent(String id);
     }
 }
